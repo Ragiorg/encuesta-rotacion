@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta de Rotación de Personal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen">
+        <!-- Header -->
+        <header class="bg-blue-600 text-white p-4">
+            <div class="container mx-auto">
+                <h1 class="text-2xl font-bold">Sistema de Encuestas de Rotación de Personal</h1>
+                <p class="text-blue-100">Análisis y prevención de rotación laboral</p>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="bg-blue-500 text-white p-2">
+            <div class="container mx-auto">
+                <ul class="flex space-x-4">
+                    <li><a href="#survey" class="hover:text-blue-200">Encuesta</a></li>
+                    <li><a href="#dashboard" class="hover:text-blue-200">Dashboard</a></li>
+                    <li><a href="#analytics" class="hover:text-blue-200">Análisis</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="container mx-auto p-6">
+            <!-- Survey Section -->
+            <section id="survey" class="mb-8">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-xl font-semibold mb-4">Encuesta de Satisfacción Laboral</h2>
+                    <form id="surveyForm" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">1. ¿Qué tan satisfecho estás con tu trabajo actual? (1-10)</label>
+                            <input type="range" min="1" max="10" value="5" class="w-full" id="satisfaction">
+                            <div class="flex justify-between text-xs text-gray-500">
+                                <span>Muy insatisfecho</span>
+                                <span>Muy satisfecho</span>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">2. ¿Cómo calificarías el equilibrio trabajo-vida? (1-10)</label>
+                            <input type="range" min="1" max="10" value="5" class="w-full" id="workLife">
+                            <div class="flex justify-between text-xs text-gray-500">
+                                <span>Muy malo</span>
+                                <span>Excelente</span>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">3. ¿Qué tan probable es que recomiendes esta empresa?</label>
+                            <select class="w-full p-2 border rounded" id="recommend">
+                                <option value="muy-probable">Muy probable</option>
+                                <option value="probable">Probable</option>
+                                <option value="neutral">Neutral</option>
+                                <option value="improbable">Improbable</option>
+                                <option value="muy-improbable">Muy improbable</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">4. Departamento</label>
+                            <select class="w-full p-2 border rounded" id="department">
+                                <option value="ventas">Ventas</option>
+                                <option value="marketing">Marketing</option>
+                                <option value="desarrollo">Desarrollo</option>
+                                <option value="rrhh">Recursos Humanos</option>
+                                <option value="finanzas">Finanzas</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+                            Enviar Encuesta
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="mb-8">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-xl font-semibold mb-4">Dashboard de Análisis</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                        <div class="bg-blue-100 p-4 rounded">
+                            <h3 class="font-semibold text-blue-800">Satisfacción Promedio</h3>
+                            <p class="text-2xl font-bold text-blue-600">7.2/10</p>
+                        </div>
+                        <div class="bg-green-100 p-4 rounded">
+                            <h3 class="font-semibold text-green-800">Retención</h3>
+                            <p class="text-2xl font-bold text-green-600">85%</p>
+                        </div>
+                        <div class="bg-yellow-100 p-4 rounded">
+                            <h3 class="font-semibold text-yellow-800">Riesgo Medio</h3>
+                            <p class="text-2xl font-bold text-yellow-600">23</p>
+                        </div>
+                        <div class="bg-red-100 p-4 rounded">
+                            <h3 class="font-semibold text-red-800">Riesgo Alto</h3>
+                            <p class="text-2xl font-bold text-red-600">8</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="font-semibold mb-2">Satisfacción por Departamento</h3>
+                            <canvas id="departmentChart" width="400" height="200"></canvas>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-2">Riesgo de Rotación</h3>
+                            <canvas id="riskChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics" class="mb-8">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-xl font-semibold mb-4">Análisis Detallado</h2>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <h3 class="font-semibold">Tendencias Identificadas</h3>
+                            <ul class="list-disc list-inside text-gray-600">
+                                <li>El departamento de Desarrollo muestra la mayor satisfacción (8.1/10)</li>
+                                <li>Ventas presenta el mayor riesgo de rotación (35% riesgo alto)</li>
+                                <li>El equilibrio trabajo-vida es el factor más crítico</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <h3 class="font-semibold">Recomendaciones</h3>
+                            <ul class="list-disc list-inside text-gray-600">
+                                <li>Implementar programas de flexibilidad laboral</li>
+                                <li>Revisar cargas de trabajo en el departamento de Ventas</li>
+                                <li>Establecer programas de reconocimiento y desarrollo</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white p-4 mt-8">
+            <div class="container mx-auto text-center">
+                <p>&copy; 2025 Sistema de Encuestas de Rotación de Personal. Desarrollado con Next.js, Prisma y NextAuth.js</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Chart.js configurations
+        const departmentCtx = document.getElementById('departmentChart').getContext('2d');
+        new Chart(departmentCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Ventas', 'Marketing', 'Desarrollo', 'RRHH', 'Finanzas'],
+                datasets: [{
+                    label: 'Satisfacción Promedio',
+                    data: [6.2, 7.1, 8.1, 7.5, 6.8],
+                    backgroundColor: ['#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6']
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 10
+                    }
+                }
+            }
+        });
+
+        const riskCtx = document.getElementById('riskChart').getContext('2d');
+        new Chart(riskCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Bajo Riesgo', 'Riesgo Medio', 'Alto Riesgo'],
+                datasets: [{
+                    data: [69, 23, 8],
+                    backgroundColor: ['#10b981', '#f59e0b', '#ef4444']
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        // Form submission
+        document.getElementById('surveyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Encuesta enviada exitosamente! Gracias por tu participación.');
+        });
+    </script>
+</body>
+</html>
