@@ -6,4 +6,8 @@ prisma/migrations/**
 .env.development.local
 .env.test.local
 .env.production.local
+<<<<<<< HEAD
 .env.production
+=======
+.env.production
+>>>>>>> 1199980 (FIX: adding types correctly to some flows of the app.)
