@@ -1,17 +1,10 @@
 node_modules
 .next
-<<<<<<< HEAD
 prisma/migrations/**
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
-<<<<<<< HEAD
 .env.production
-=======
-.env.production
->>>>>>> 1199980 (FIX: adding types correctly to some flows of the app.)
-=======
-prisma/migrations/**
->>>>>>> dd0bd86 (FIX: login and signup flows and add a DEV Postgress DB)
+
