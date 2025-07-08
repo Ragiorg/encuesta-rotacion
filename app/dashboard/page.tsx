@@ -1,7 +1,7 @@
 
 'use client'
 
-import { useSession } from 'next-auth/react'
+import { useSession, getSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
@@ -144,20 +144,22 @@ export default function DashboardPage() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (status === 'loading') return
+    const checkSession = async () => {
+      const session = await getSession({ broadcast: false })
+      if (!session) {
+        router.push('/auth/signin')
+        return
+      }
 
-    if (!session) {
-      router.push('/auth/signin')
-      return
+      if (session.user?.role !== 'ADMIN') {
+        router.push('/')
+        return
+      }
+
+      fetchAnalytics()
     }
-
-    if (session.user?.role !== 'ADMIN') {
-      router.push('/')
-      return
-    }
-
-    fetchAnalytics()
-  }, [session, status, router])
+    checkSession()
+  }, [])
 
   const fetchAnalytics = async () => {
     try {

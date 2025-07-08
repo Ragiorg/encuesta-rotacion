@@ -34,7 +34,7 @@ export default function SignIn() {
       if (result?.error) {
         setError('Credenciales inválidas')
       } else {
-        const session = await getSession()
+        const session = await getSession({broadcast: false});
         if (session?.user?.role === 'ADMIN') {
           router.push('/dashboard')
         } else {
