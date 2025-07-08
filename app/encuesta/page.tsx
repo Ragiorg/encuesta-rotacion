@@ -1,7 +1,7 @@
 
 'use client'
 
-import { useSession } from 'next-auth/react'
+import { getSession, useSession } from 'next-auth/react'
 import { motion } from 'framer-motion'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { 
@@ -23,9 +23,14 @@ export default function EncuestaPage() {
   const router = useRouter()
 
   useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/auth/signin')
+    const checkSession = async () => {
+      const session = await getSession({ broadcast: false });
+      if (!session) {
+        router.push('/auth/signin')
+        return
+      }
     }
+    checkSession()
   }, [status, router])
 
   if (status === 'loading') {
