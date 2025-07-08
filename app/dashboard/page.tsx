@@ -145,7 +145,8 @@ export default function DashboardPage() {
 
   useEffect(() => {
     const checkSession = async () => {
-      const session = await getSession({ broadcast: false })
+      const session = await getSession({ broadcast: false });
+      console.log('Session:', session);
       if (!session) {
         router.push('/auth/signin')
         return
