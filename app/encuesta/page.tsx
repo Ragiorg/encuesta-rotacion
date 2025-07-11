@@ -24,8 +24,8 @@ export default function EncuestaPage() {
 
   useEffect(() => {
     const checkSession = async () => {
-      const session = await getSession({ broadcast: false });
-      if (!session) {
+      const sessionToken = await getSession({ broadcast: false });
+      if (!sessionToken) {
         router.push('/auth/signin')
         return
       }
