@@ -34,6 +34,7 @@ model Organization {
   updatedAt      DateTime
   SurveyResponse SurveyResponse[]
   User           User[]
+  Employee       Employee[]
 }
 
 model Session {
@@ -44,10 +45,32 @@ model Session {
   User         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+model Employee {
+  id                String          @id
+  employeeNumber    Int             @unique
+  surveyId          String?         @unique
+  firstName         String
+  middleName        String
+  lastName          String
+  address           String
+  role              String
+  department        Department?     @relation(fields: [departmentId], references: [id])
+  departmentId      String?
+  position          Position?       @relation(fields: [positionId], references: [id])
+  positionId        String?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime
+  hiredAt           DateTime        @default("2020-01-01T00:00:00.000Z")
+  createdBy         String
+  organizationId    String
+  Organization      Organization    @relation(fields: [organizationId], references: [id])
+  SurveyResponse    SurveyResponse? @relation(fields: [surveyId], references: [id])      
+}
+
 model SurveyResponse {
   id                       String       @id
-  userId                   String?
-  organizationId           String
+  isCompleted              Boolean
+  organizationId           String       
   responses                Json
   completedAt              DateTime     @default(now())
   satisfactionScore        Int?
@@ -63,7 +86,8 @@ model SurveyResponse {
   turnoverRisk             String?
   recommendCompany         Boolean?
   Organization             Organization @relation(fields: [organizationId], references: [id])
-  User                     User?        @relation(fields: [userId], references: [id])
+  User                     User?        
+  Employee                 Employee?   
 }
 
 model User {
@@ -73,14 +97,34 @@ model User {
   emailVerified  DateTime?
   image          String?
   role           UserRole         @default(EMPLOYEE)
-  organizationId String?
+  department     Department?      @relation(fields: [departmentId], references: [id])
+  departmentId   String?
+  position       Position?        @relation(fields: [positionId], references: [id])
+  positionId     String?
+  organizationId String?          
+  surveyId       String?          @unique
   createdAt      DateTime         @default(now())
   updatedAt      DateTime
+  hiredAt        DateTime         @default("2020-01-01T00:00:00.000Z")
   password       String?
   Account        Account[]
   Session        Session[]
-  SurveyResponse SurveyResponse[]
+  SurveyResponse SurveyResponse?  @relation(fields: [surveyId], references: [id])
   Organization   Organization?    @relation(fields: [organizationId], references: [id])
+}
+
+model Department {
+  id        String     @id @default(uuid())
+  name      String     @unique
+  employees Employee[]
+  users User[]
+}
+
+model Position {
+  id        String     @id @default(uuid())
+  title     String     @unique
+  employees Employee[]
+  users User[]
 }
 
 model VerificationToken {

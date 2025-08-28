@@ -1,0 +1,1379 @@
+[
+  {
+    "id": 1,
+    "pregunta": "El salario que recibo es justo en relación con mis responsabilidades.",
+    "categoria": "compensationSatisfaction",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "pregunta": "Mi salario me permite cubrir mis necesidades básicas.",
+    "categoria": "compensationSatisfaction",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "pregunta": "Recibo beneficios adicionales (como seguros, bonos, etc.) que complementan mi salario.",
+    "categoria": "compensationSatisfaction",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "pregunta": "Estoy satisfecho con el sistema de bonos o incentivos que ofrece la empresa.",
+    "categoria": "compensationSatisfaction",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "pregunta": "Considero que el salario que recibo es competitivo en comparación con otras empresas del sector.",
+    "categoria": "compensationSatisfaction",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "pregunta": "El espacio físico donde trabajo es cómodo y adecuado para mis tareas.",
+    "categoria": "workEnvironment",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "pregunta": "Cuento con las herramientas y equipos necesarios para realizar bien mi trabajo.",
+    "categoria": "workEnvironment",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "pregunta": "Las condiciones de seguridad en mi área de trabajo son apropiadas.",
+    "categoria": "satisfactionScore",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "pregunta": "Las instalaciones (iluminación, ventilación, limpieza) son adecuadas.",
+    "categoria": "workEnvironment",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "pregunta": "El ambiente laboral es agradable.",
+    "categoria": "workEnvironment",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "pregunta": "Recibo el apoyo que necesito de parte de mi jefe inmediato.",
+    "categoria": "managementQuality",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "pregunta": "Mi jefe reconoce el esfuerzo que realizo en mi trabajo.",
+    "categoria": "managementQuality",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "pregunta": "Mi supervisor me brinda instrucciones claras para realizar mis tareas.",
+    "categoria": "managementQuality",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "pregunta": "Mi jefe inmediato me trata con respeto.",
+    "categoria": "managementQuality",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "pregunta": "Confío en las decisiones que toma mi supervisor.",
+    "categoria": "managementQuality",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "pregunta": "La empresa me brinda oportunidades para crecer profesionalmente.",
+    "categoria": "careerDevelopment",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "pregunta": "He recibido capacitación para mejorar mis habilidades en el trabajo.",
+    "categoria": "careerDevelopment",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "pregunta": "Considero que en esta empresa puedo desarrollar mi plan de carrera.",
+    "categoria": "careerDevelopment",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "pregunta": "Existen posibilidades reales de promoción dentro de la organización.",
+    "categoria": "careerDevelopment",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "pregunta": "La empresa me motiva a aprender cosas nuevas.",
+    "categoria": "careerDevelopment",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "pregunta": "Tengo una buena relación con mis compañeros de trabajo.",
+    "categoria": "satisfactionScore",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "pregunta": "Mis compañeros me apoyan cuando lo necesito.",
+    "categoria": "satisfactionScore",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "pregunta": "Siento que formo parte de un equipo unido.",
+    "categoria": "workEnvironment",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "pregunta": "Puedo confiar en mis compañeros de trabajo.",
+    "categoria": "satisfactionScore",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "pregunta": "La comunicación entre compañeros es buena.",
+    "categoria": "satisfactionScore",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "pregunta": "Me siento orgulloso de trabajar en esta empresa.",
+    "categoria": "satisfactionScore",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "pregunta": "Siento que mi trabajo es valorado.",
+    "categoria": "satisfactionScore",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "pregunta": "Estoy satisfecho con las políticas de la empresa.",
+    "categoria": "managementQuality",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "pregunta": "Las políticas y procedimientos se aplican de manera justa para todos.",
+    "categoria": "managementQuality",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "pregunta": "La comunicación dentro de la empresa es clara y oportuna.",
+    "categoria": "satisfactionScore",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "pregunta": "Estoy de acuerdo con la forma en que la empresa es administrada.",
+    "categoria": "managementQuality",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "pregunta": "Las decisiones importantes se toman considerando la opinión de los empleados.",
+    "categoria": "managementQuality",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "pregunta": "La empresa se preocupa por mi bienestar.",
+    "categoria": "workLifeBalance",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "pregunta": "Existe un equilibrio adecuado entre mi vida personal y laboral.",
+    "categoria": "workLifeBalance",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "pregunta": "La empresa ofrece programas que promueven la salud y el bienestar.",
+    "categoria": "workLifeBalance",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "pregunta": "Siento que puedo tomarme el tiempo necesario para atender asuntos personales cuando lo necesito.",
+    "categoria": "satisfactionScore",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "pregunta": "La carga de trabajo que tengo me permite mantener un equilibrio saludable entre el trabajo y mi vida personal.",
+    "categoria": "workLifeBalance",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "pregunta": "Me siento motivado a dar lo mejor de mí en mi trabajo.",
+    "categoria": "satisfactionScore",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "pregunta": "Estoy satisfecho con mi trabajo en general.",
+    "categoria": "satisfactionScore",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "pregunta": "Siento que mi trabajo es importante para la empresa.",
+    "categoria": "satisfactionScore",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "pregunta": "Estoy comprometido con los objetivos de la empresa.",
+    "categoria": "satisfactionScore",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "pregunta": "Recomendaría esta empresa como un buen lugar para trabajar.",
+    "categoria": "satisfactionScore",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "pregunta": "Me siento satisfecho con la estabilidad laboral que tengo.",
+    "categoria": "satisfactionScore",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "pregunta": "Considero que mi trabajo es interesante y retador.",
+    "categoria": "satisfactionScore",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "pregunta": "Tengo la autonomía suficiente para tomar decisiones en mi trabajo.",
+    "categoria": "satisfactionScore",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "pregunta": "Recibo retroalimentación constructiva sobre mi desempeño.",
+    "categoria": "managementQuality",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "pregunta": "Siento que mi trabajo me permite aprender y crecer como persona.",
+    "categoria": "careerDevelopment",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "pregunta": "Estoy satisfecho con la forma en que se reconocen mis logros.",
+    "categoria": "managementQuality",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "pregunta": "Considero que la empresa valora mis ideas y sugerencias.",
+    "categoria": "satisfactionScore",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "pregunta": "Siento que mi esfuerzo en el trabajo tiene un impacto positivo en la empresa.",
+    "categoria": "satisfactionScore",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "pregunta": "En general, me siento satisfecho con la empresa.",
+    "categoria": "satisfactionScore",
+    "opciones": [
+      {
+        "texto": "Nunca",
+        "valor": 1
+      },
+      {
+        "texto": "Rara vez",
+        "valor": 2
+      },
+      {
+        "texto": "A veces",
+        "valor": 3
+      },
+      {
+        "texto": "Frecuentemente",
+        "valor": 4
+      },
+      {
+        "texto": "Siempre",
+        "valor": 5
+      }
+    ]
+  }
+]

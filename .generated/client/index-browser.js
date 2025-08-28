@@ -150,9 +150,27 @@ exports.Prisma.SessionScalarFieldEnum = {
   expires: 'expires'
 };
 
+exports.Prisma.EmployeeScalarFieldEnum = {
+  id: 'id',
+  employeeNumber: 'employeeNumber',
+  surveyId: 'surveyId',
+  firstName: 'firstName',
+  middleName: 'middleName',
+  lastName: 'lastName',
+  address: 'address',
+  role: 'role',
+  departmentId: 'departmentId',
+  positionId: 'positionId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  hiredAt: 'hiredAt',
+  createdBy: 'createdBy',
+  organizationId: 'organizationId'
+};
+
 exports.Prisma.SurveyResponseScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
+  isCompleted: 'isCompleted',
   organizationId: 'organizationId',
   responses: 'responses',
   completedAt: 'completedAt',
@@ -177,10 +195,24 @@ exports.Prisma.UserScalarFieldEnum = {
   emailVerified: 'emailVerified',
   image: 'image',
   role: 'role',
+  departmentId: 'departmentId',
+  positionId: 'positionId',
   organizationId: 'organizationId',
+  surveyId: 'surveyId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  hiredAt: 'hiredAt',
   password: 'password'
+};
+
+exports.Prisma.DepartmentScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.PositionScalarFieldEnum = {
+  id: 'id',
+  title: 'title'
 };
 
 exports.Prisma.VerificationTokenScalarFieldEnum = {
@@ -222,8 +254,11 @@ exports.Prisma.ModelName = {
   Account: 'Account',
   Organization: 'Organization',
   Session: 'Session',
+  Employee: 'Employee',
   SurveyResponse: 'SurveyResponse',
   User: 'User',
+  Department: 'Department',
+  Position: 'Position',
   VerificationToken: 'VerificationToken'
 };
 
