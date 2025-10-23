@@ -217,7 +217,7 @@ export default function DashboardPage() {
   const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#06B6D4']
 
   // Funciones auxiliares seguras
-  const getSafeScore = (score: any) => safeToFixed(score, 1)
+  const getSafeScore = (score: any) => safeToFixed(score/10, 1)
   const getSafePercentage = (value: any, total: any) => safePercentage(value, total)
   const getRiskColor = (riskLevel: string) => {
     switch (riskLevel) {

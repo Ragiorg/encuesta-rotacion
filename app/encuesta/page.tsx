@@ -36,10 +36,26 @@ export default function EncuestaPage() {
       const surveyResponse = await fetch('/api/survey-responses/' + sessionToken.user.id);
       const surveyData = await surveyResponse.json();
       setUserData({...surveyData.worker});
-      setSurvey({questions: [...surveyData.surveyQuestions], isCompleted: surveyData.success ? surveyData.responses.isCompleted : false});
+      setSurvey({questions: [...surveyData.surveyQuestions], isCompleted: surveyData.success ? surveyData.responses.isCompleted : false, surveyId: surveyData?.responses?.id, responses: surveyData?.responses});
     }
     checkSession()
   }, [status, router])
+
+  const determineTurnoverRisk = (surveyData: any) => {
+    // Implement your logic to determine turnover risk based on responses
+    // Number of questions with category satisfactionScore
+    const totalQuestions = survey.questions.filter((question: any) => question.category === 'satisfactionScore')?.length;
+    // Calculate average satisfaction score
+    const averageSatisfaction = surveyData.satisfactionScore / totalQuestions;
+    // Determine risk level
+    if (averageSatisfaction < 3) {
+      return 'High';
+    } else if (averageSatisfaction < 4) {
+      return 'Medium';
+    } else {
+      return 'Low';
+    }
+  }
 
   const submitSurveyResponses = async (responses: any) => {
     try {
@@ -48,8 +64,32 @@ export default function EncuestaPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(responses),
+        body: JSON.stringify(
+          { 
+            ...responses,
+            surveyId: survey.surveyId || null,
+            isCompleted: survey.questions.length === responses.responses.length,
+            workerId: session?.user.id,
+            organizationId: session?.user.organizationId,
+            organizationName: session?.user.organizationName,
+            turnoverRisk: determineTurnoverRisk(responses),
+            yearsInCompany: session?.user.hiredAt ? new Date().getFullYear() - new Date(session.user.hiredAt).getFullYear() : 0,
+            department: session?.user.departmentName || null,
+            position: session?.user.positionTitle || null
+
+          }),
       });
+
+      const data = await response.json();
+      if (response.ok) {
+        // Handle successful submission
+        console.log('Survey responses submitted successfully:', data);
+        setSurvey({...survey, responses: data, surveyId: data.responseId, ...data.data});
+      } else {
+        // Handle errors
+        console.error('Error submitting survey responses:', data);
+      }
+
     } catch (error) {
       console.error('Error submitting survey responses:', error);
     }
@@ -195,11 +235,12 @@ export default function EncuestaPage() {
       </div>
 
       {/* Survey Questions */}
-      { survey && !survey.isCompleted ? (
+      { !survey?.isCompleted && survey?.questions ? (
         <QuestionarieForm
-          questions={survey.questions}
-          saveResponses={(surveyData) => submitSurveyResponses(surveyData)}
-          defaultQuestionIndex={0}
+          questions={survey?.questions}
+          saveResponses={async (surveyData) => await submitSurveyResponses(surveyData)}
+          defaultQuestionIndex={survey?.responses ? survey?.responses.length - 1 : 0}
+          responsesProgressData={survey?.responses}
         />
       ) : (
         <div className="text-center">

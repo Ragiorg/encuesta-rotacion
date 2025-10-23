@@ -19,11 +19,9 @@ export async function GET(request: Request, { params }: { params: { workerId: st
   let worker: User | Employee | null = await prisma.user.findUnique({
     where: { id: workerId },
     include: {
-      Organization: {
-        select: {
-          name: true,
-        },
-      },
+      Organization: true,
+      department: true,
+      position: true,
     },
   });
 
@@ -31,12 +29,23 @@ export async function GET(request: Request, { params }: { params: { workerId: st
     workerType = 'Employee';
     worker = await prisma.employee.findUnique({
       where: { id: workerId },
+      include: {
+        Organization: true,
+        department: true,
+        position: true,
+      },
     });
   }
+  
 
-  const responses = await prisma.surveyResponse.findFirst({
-    where: { Employee: { id: workerId }, User: { id: workerId } },
-  });
+  // only query if there's a non-null surveyId to satisfy Prisma types
+  const surveyId = worker?.surveyId ?? undefined;
+
+  const responses = surveyId
+    ? await prisma.surveyResponse.findFirst({
+        where: { id: surveyId },
+      })
+    : null;
 
   if (!responses) {
     return NextResponse.json(

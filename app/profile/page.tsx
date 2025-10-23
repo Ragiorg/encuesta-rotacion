@@ -1,7 +1,7 @@
 
 'use client'
 
-import { useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
@@ -19,16 +19,30 @@ import {
   Shield,
   Edit,
   Save,
-  X
+  X,
+  Briefcase,
+  DoorOpen,
+  Goal
 } from 'lucide-react'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+
+type Department = { id: string; name: string }
+type Position = { id: string; title: string }
 
 export default function ProfilePage() {
   const { data: session, status } = useSession()
   const router = useRouter()
+  
+  const [departments, setDepartments] = useState<Department[]>([])
+  const [positions, setPositions] = useState<Position[]>([])
   const [isEditing, setIsEditing] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
-    email: ''
+    email: '',
+    department: '',
+    position: ''
   })
 
   useEffect(() => {
@@ -39,9 +53,14 @@ export default function ProfilePage() {
 
   useEffect(() => {
     if (session?.user) {
+      console.log("Session user:", session.user);
+      fetchDepartments()
+      fetchPositions()
       setFormData({
         name: session.user.name || '',
-        email: session.user.email || ''
+        email: session.user.email || '',
+        department: session.user.departmentId || '',
+        position: session.user.positionId || ''
       })
     }
   }, [session])
@@ -58,20 +77,80 @@ export default function ProfilePage() {
     return null
   }
 
+  const fetchDepartments = async () => {
+    try {
+      const response = await fetch('/api/departments');
+      const data = await response.json();
+      setDepartments(data);
+    } catch (error) {
+      console.error('Error fetching departments:', error);
+    }
+  };
+
+  const fetchPositions = async () => {
+    try {
+      const response = await fetch('/api/positions');
+      const data = await response.json();
+      setPositions(data);
+    } catch (error) {
+      console.error('Error fetching positions:', error);
+    }
+  };
+
   const handleSave = async () => {
     // Here you would implement the API call to update user profile
-    setIsEditing(false)
+    try {
+      const response = await fetch(`/api/user/${session.user.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          departmentId: formData.department,
+          positionId: formData.position,
+        }),
+      });
+
+      if (response.status !== 200) {
+        throw new Error('Failed to update profile');
+      }
+
+      const data = await response.json();
+      setFormData({
+        name: data.user.name,
+        email: data.user.email,
+        department: data.user.departmentId,
+        position: data.user.positionId,
+      });
+      setIsEditing(false);
+
+      // Show login again modal
+      setModalOpen(true);
+
+    } catch (error) {
+      console.error('Error updating profile:', error);
+    }
   }
 
   const handleCancel = () => {
     setFormData({
       name: session?.user?.name || '',
-      email: session?.user?.email || ''
+      email: session?.user?.email || '',
+      department: session?.user?.departmentId || '',
+      position: session?.user?.positionId || ''
     })
     setIsEditing(false)
   }
 
+  const closeSessionModal = () => {
+    setModalOpen(false);
+    signOut({ callbackUrl: '/auth/signin' })
+  }
+
   return (
+  <>
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-teal-50 py-8">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
         {/* Header */}
@@ -120,7 +199,13 @@ export default function ProfilePage() {
                   {session.user?.organizationId && (
                     <div className="flex items-center gap-3 text-sm text-muted-foreground">
                       <Building className="h-4 w-4" />
-                      <span>Organización registrada</span>
+                      <span>{session.user?.organizationName}</span>
+                    </div>
+                  )}
+                  {session.user?.hiredAt && (
+                    <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                      <Goal className="h-6 w-6" />
+                      <span>Contratado el {new Date(session.user?.hiredAt ).getDate()} de {new Date(session.user?.hiredAt ).toLocaleString('default', { month: 'long' })} de {new Date(session.user?.hiredAt ).getFullYear()}</span>
                     </div>
                   )}
                   <div className="flex items-center gap-3 text-sm text-muted-foreground">
@@ -203,6 +288,58 @@ export default function ProfilePage() {
                   </div>
 
                   <div className="space-y-2">
+                    <Label htmlFor="department">Departamento</Label>
+                    {isEditing ? (
+                      <Select
+                        value={formData.department}
+                        onValueChange={(value: string) => setFormData({ ...formData, department: value })}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Selecciona un departamento" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {departments.map((department) => (
+                            <SelectItem key={department.id} value={department.id}>
+                              {department.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    ) : (
+                      <div className="flex items-center gap-3 p-3 bg-muted rounded-md">
+                        <DoorOpen className="h-4 w-4 text-muted-foreground" />
+                        <span>{session.user?.departmentName || 'No especificado'}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="position">Posición</Label>
+                    {isEditing ? (
+                      <Select
+                        value={formData.position}
+                        onValueChange={(value: string) => setFormData({ ...formData, position: value })}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Selecciona una posición" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {positions.map((position) => (
+                            <SelectItem key={position.id} value={position.id}>
+                              {position.title}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    ) : (
+                      <div className="flex items-center gap-3 p-3 bg-muted rounded-md">
+                        <Briefcase className="h-4 w-4 text-muted-foreground" />
+                        <span>{session.user?.positionTitle || 'No especificado'}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
                     <Label>Rol</Label>
                     <div className="flex items-center gap-3 p-3 bg-muted rounded-md">
                       <Shield className="h-4 w-4 text-muted-foreground" />
@@ -215,7 +352,7 @@ export default function ProfilePage() {
                       <Label>Organización</Label>
                       <div className="flex items-center gap-3 p-3 bg-muted rounded-md">
                         <Building className="h-4 w-4 text-muted-foreground" />
-                        <span>Organización registrada</span>
+                        <span>{session.user?.organizationName}</span>
                       </div>
                     </div>
                   )}
@@ -269,5 +406,21 @@ export default function ProfilePage() {
         </motion.div>
       </div>
     </div>
+
+    {/**Login Again Confirmation Modal */}
+    <Dialog open={modalOpen} onOpenChange={setModalOpen}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Vuelve a iniciar sesión</DialogTitle>
+          <DialogDescription>
+            Para reflejar los cambios recientes en tu perfil, por favor cierra sesión y vuelve a iniciar sesión.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <Button onClick={() => closeSessionModal()}>Aceptar</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  </>
   )
 }

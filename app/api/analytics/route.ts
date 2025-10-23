@@ -34,7 +34,8 @@ export async function GET(request: NextRequest) {
 
     const responses = await prisma.surveyResponse.findMany({
       where: {
-        organizationId: organizationId
+        organizationId: organizationId,
+        isCompleted: true
       }
     })
 

@@ -8,8 +8,12 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     const { 
-      organizationName, 
-      responses, 
+      workerId,
+      surveyId,
+      isCompleted,
+      organizationId,
+      organizationName,
+      responses,
       satisfactionScore,
       workLifeBalance,
       careerDevelopment,
@@ -24,71 +28,105 @@ export async function POST(request: NextRequest) {
       recommendCompany
     } = body
 
-    // Validate required fields
-    if (!organizationName || !responses) {
-      return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Nombre de organización y respuestas son requeridos' 
-        },
-        { status: 400 }
-      )
+    let isUser = true;
+    if (workerId) {
+      const userFound = await prisma.user.findUnique({
+        where: { id: workerId }
+      })
+      if (!userFound) {
+        const employeeFound = await prisma.employee.findUnique({
+          where: { id: workerId }
+        })
+        if (employeeFound) {
+          isUser = false;
+        }
+      }
     }
 
-    // Find organization by name
-    const organization = await prisma.organization.findUnique({
-      where: { name: organizationName }
-    })
-
-    if (!organization) {
-      return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Organización no encontrada. Por favor contacte a su administrador.' 
+    let surveyResponse;
+    if(surveyId) {
+      surveyResponse = await prisma.surveyResponse.update({
+        where: {
+          id: surveyId
         },
-        { status: 404 }
-      )
+        data: {
+          isCompleted: isCompleted,
+          responses,
+          satisfactionScore: satisfactionScore ? parseInt(satisfactionScore) : null,
+          workLifeBalance: workLifeBalance ? parseInt(workLifeBalance) : null,
+          careerDevelopment: careerDevelopment ? parseInt(careerDevelopment) : null,
+          managementQuality: managementQuality ? parseInt(managementQuality) : null,
+          compensationSatisfaction: compensationSatisfaction ? parseInt(compensationSatisfaction) : null,
+          workEnvironment: workEnvironment ? parseInt(workEnvironment) : null,
+          department,
+          yearsInCompany: yearsInCompany ? parseInt(yearsInCompany) : null,
+          ageRange,
+          position,
+          turnoverRisk,
+          recommendCompany: recommendCompany !== undefined ? Boolean(recommendCompany) : null,
+          User: isUser ? {
+            connect: workerId ? { id: workerId } : undefined
+          } : undefined,
+          Employee: !isUser ? {
+            connect: workerId ? { id: workerId } : undefined
+          } : undefined
+        }
+      })
+    } else {
+        surveyResponse = await prisma.surveyResponse.create({
+          data: {
+            id: crypto.randomUUID(), // Generate a unique ID for the response
+            isCompleted: isCompleted,
+            organizationId: organizationId,
+            responses,
+            satisfactionScore: satisfactionScore ? parseInt(satisfactionScore) : null,
+            workLifeBalance: workLifeBalance ? parseInt(workLifeBalance) : null,
+            careerDevelopment: careerDevelopment ? parseInt(careerDevelopment) : null,
+            managementQuality: managementQuality ? parseInt(managementQuality) : null,
+            compensationSatisfaction: compensationSatisfaction ? parseInt(compensationSatisfaction) : null,
+            workEnvironment: workEnvironment ? parseInt(workEnvironment) : null,
+            department,
+            yearsInCompany: yearsInCompany ? parseInt(yearsInCompany) : null,
+            ageRange,
+            position,
+            turnoverRisk,
+            recommendCompany: recommendCompany !== undefined ? Boolean(recommendCompany) : null,
+            User: isUser ? {
+              connect: workerId ? { id: workerId } : undefined
+            } : undefined,
+            Employee: !isUser ? {
+              connect: workerId ? { id: workerId } : undefined
+            } : undefined
+          }
+      })
     }
 
-    // Get or create anonymous user
-    const anonymousUser = await prisma.user.upsert({
-      where: { email: 'anonymous@system.local' },
-      update: {},
-      create: {
-        id: 'anonymous-user-id',
-        name: 'Anonymous User',
-        email: 'anonymous@system.local',
-        role: 'EMPLOYEE',
-        updatedAt: new Date()
-      }
-    })
-
-    // Create survey response
-    const surveyResponse = await prisma.surveyResponse.create({
-      data: {
-        id: crypto.randomUUID(), // Generate a unique ID for the response
-        userId: anonymousUser.id,
-        organizationId: organization.id,
-        responses,
-        satisfactionScore: satisfactionScore ? parseInt(satisfactionScore) : null,
-        workLifeBalance: workLifeBalance ? parseInt(workLifeBalance) : null,
-        careerDevelopment: careerDevelopment ? parseInt(careerDevelopment) : null,
-        managementQuality: managementQuality ? parseInt(managementQuality) : null,
-        compensationSatisfaction: compensationSatisfaction ? parseInt(compensationSatisfaction) : null,
-        workEnvironment: workEnvironment ? parseInt(workEnvironment) : null,
-        department,
-        yearsInCompany: yearsInCompany ? parseInt(yearsInCompany) : null,
-        ageRange,
-        position,
-        turnoverRisk,
-        recommendCompany: recommendCompany !== undefined ? Boolean(recommendCompany) : null,
-      }
-    })
+    // add survey to worker
+    if (workerId && isUser && surveyResponse.id) {
+      await prisma.user.update({
+        where: { id: workerId },
+        data: {
+          SurveyResponse: {
+            connect: { id: surveyResponse.id }
+          }
+        }
+      })
+    } else if (workerId && !isUser && surveyResponse.id) {
+      await prisma.employee.update({
+        where: { id: workerId },
+        data: {
+          SurveyResponse: {
+            connect: { id: surveyResponse.id }
+          }
+        }
+      })
+    }
 
     return NextResponse.json({
       success: true,
       message: 'Encuesta guardada exitosamente',
-      responseId: surveyResponse.id
+      responseId: surveyResponse.id,
+      data: surveyResponse
     })
 
   } catch (error) {
