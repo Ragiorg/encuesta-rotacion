@@ -1,9 +1,29 @@
 
-import { NextAuthOptions } from "next-auth"
+import { NextAuthOptions, Session } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { prisma } from "./db"
 import bcrypt from "bcryptjs"
+
+// Extend the Session user type to include custom properties
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string
+      role: string
+      organizationId?: string
+      organizationName?: string
+      hiredAt?: string
+      departmentId?: string
+      departmentName?: string
+      positionId?: string
+      positionTitle?: string
+      name?: string | null
+      email?: string | null
+      image?: string | null
+    }
+  }
+}
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -28,6 +48,8 @@ export const authOptions: NextAuthOptions = {
           },
           include: {
             Organization: true,
+            department: true,
+            position: true,
             Account: false,
             Session: false,
             SurveyResponse: false,
@@ -56,6 +78,11 @@ export const authOptions: NextAuthOptions = {
           role: user.role,
           organizationId: user.organizationId || undefined,
           organizationName: user.Organization?.name,
+          hiredAt: user.hiredAt || undefined,
+          departmentId: user.departmentId || undefined,
+          departmentName: user.department?.name || undefined,
+          positionTitle: user.position?.title || undefined,
+          positionId: user.positionId || undefined,
         }
       }
     })
@@ -66,9 +93,24 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.role = user.role
-        token.organizationId = user.organizationId
-        token.organizationName = user.organizationName
+        const customUser = user as typeof user & {
+          role?: string
+          organizationId?: string
+          organizationName?: string
+          hiredAt?: string
+          departmentId?: string
+          positionId?: string
+          positionTitle?: string
+          departmentName?: string
+        }
+        token.role = customUser.role
+        token.organizationId = customUser.organizationId
+        token.organizationName = customUser.organizationName
+        token.hiredAt = customUser.hiredAt
+        token.departmentId = customUser.departmentId
+        token.positionId = customUser.positionId
+        token.positionTitle = customUser.positionTitle
+        token.departmentName = customUser.departmentName
       }
       return token
     },
@@ -78,6 +120,11 @@ export const authOptions: NextAuthOptions = {
         session.user.role = token.role as string
         session.user.organizationId = token.organizationId as string
         session.user.organizationName = token.organizationName as string
+        session.user.hiredAt = token.hiredAt as string
+        session.user.departmentId = token.departmentId as string
+        session.user.positionId = token.positionId as string
+        session.user.positionTitle = token.positionTitle as string
+        session.user.departmentName = token.departmentName as string
       }
       return session
     },

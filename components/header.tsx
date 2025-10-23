@@ -7,20 +7,38 @@ import { useSession } from 'next-auth/react'
 import { Menu, X, Users, FileText, Shield, Phone, HelpCircle, Building, BriefcaseBusiness } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { AuthButton } from '@/components/auth-button'
+import { usePathname } from 'next/navigation'
 
 export function Header() {
+  const pathName = usePathname(); 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { data: session } = useSession()
 
-  const navigation = [
+  let navigation = [
     { name: 'Inicio', href: '/', icon: Users, show: true },
     { name: 'Instrucciones', href: '/instrucciones', icon: FileText, show: true },
-    { name: 'Empleados', href: '/empleados', icon: BriefcaseBusiness, show: session?.user ? true : false },
     { name: 'Encuesta', href: '/encuesta', icon: Users, show: true },
     { name: 'Privacidad', href: '/privacidad', icon: Shield, show: true },
     { name: 'FAQ', href: '/faq', icon: HelpCircle, show: true },
     { name: 'Contacto', href: '/contacto', icon: Phone, show: true },
   ]
+
+  const uuidRegex =
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+  const segments = pathName.split("/");
+  const lastSegment = segments.pop() || "";
+
+  const isUuid = uuidRegex.test(lastSegment);
+  if (pathName.startsWith("/encuesta/") && isUuid) {
+    return null; // Don't render the header
+  }
+
+  if (session?.user) {
+    navigation.splice(2, 0,
+      { name: 'Empleados', href: '/empleados', icon: BriefcaseBusiness, show: true }
+    )
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -48,7 +66,6 @@ export function Header() {
           <nav className="hidden md:flex items-center space-x-1">
             {navigation.map((item) => {
               const Icon = item.icon
-              if (!item.show) return null
               return (
                 <Link
                   key={item.name}
@@ -89,7 +106,6 @@ export function Header() {
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t">
               {navigation.map((item) => {
                 const Icon = item.icon
-                if (!item.show) return null
                 return (
                   <Link
                     key={item.name}

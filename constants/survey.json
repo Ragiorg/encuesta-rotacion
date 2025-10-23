@@ -1,5 +1,32 @@
 [
   {
+    "id": 0,
+    "pregunta": "¿En que rango de edad te encuentras?",
+    "categoria": "ageRange",
+    "opciones": [
+      {
+        "texto": "18-24",
+        "valor": "18-24"
+      },
+      {
+        "texto": "25-34",
+        "valor": "25-34"  
+      },
+      {
+        "texto": "35-44",
+        "valor": "35-44"
+      },
+      {
+        "texto": "45-54",
+        "valor": "45-54"
+      },
+      {
+        "texto": "55 o más",
+        "valor": "55 o más"
+      }
+    ]
+  },
+  {
     "id": 1,
     "pregunta": "El salario que recibo es justo en relación con mis responsabilidades.",
     "categoria": "compensationSatisfaction",
@@ -1375,5 +1402,21 @@
         "valor": 5
       }
     ]
+  },
+  {
+    "id": 52,
+    "pregunta": "¿Recomendarías esta empresa como un buen lugar para trabajar?",
+    "categoria": "recommendCompany",
+    "opciones": [
+      {
+        "texto": "Sí",
+        "valor": true
+      },
+      {
+        "texto": "No",
+        "valor": false
+      }
+    ]
   }
+
 ]
