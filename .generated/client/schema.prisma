@@ -46,13 +46,19 @@ model Session {
 }
 
 model Employee {
-  id             String          @id
+  id             String          @id @default(uuid())
   employeeNumber Int             @unique
   surveyId       String?         @unique
   firstName      String
   middleName     String
   lastName       String
+  email          String
   address        String
+  role           UserRole        @default(EMPLOYEE)
+  department     Department?     @relation(fields: [departmentId], references: [id])
+  departmentId   String?
+  position       Position?       @relation(fields: [positionId], references: [id])
+  positionId     String?
   createdAt      DateTime        @default(now())
   updatedAt      DateTime
   hiredAt        DateTime        @default("2020-01-01T00:00:00.000Z")
@@ -91,7 +97,11 @@ model User {
   email          String          @unique
   emailVerified  DateTime?
   image          String?
-  role           UserRole        @default(EMPLOYEE)
+  role           UserRole        @default(ADMIN)
+  department     Department?     @relation(fields: [departmentId], references: [id])
+  departmentId   String?
+  position       Position?       @relation(fields: [positionId], references: [id])
+  positionId     String?
   organizationId String?
   surveyId       String?         @unique
   createdAt      DateTime        @default(now())
@@ -102,6 +112,20 @@ model User {
   Session        Session[]
   SurveyResponse SurveyResponse? @relation(fields: [surveyId], references: [id])
   Organization   Organization?   @relation(fields: [organizationId], references: [id])
+}
+
+model Department {
+  id        String     @id @default(uuid())
+  name      String     @unique
+  employees Employee[]
+  users     User[]
+}
+
+model Position {
+  id        String     @id @default(uuid())
+  title     String     @unique
+  employees Employee[]
+  users     User[]
 }
 
 model VerificationToken {

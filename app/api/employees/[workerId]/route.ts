@@ -7,8 +7,8 @@ const prisma = new PrismaClient();
  * PUT /api/employees/[workerId]
  * Update an employee
  */
-export async function PUT(request: NextRequest, { params }: { params: { workerId: string } }) {
-    const { workerId } = await params;
+export async function PUT(request: NextRequest, context: any) {
+    const { workerId } = await context.params;
     if (!workerId) return NextResponse.json({ error: "Missing workerId" }, { status: 400 });
 
     let body: any;
@@ -51,8 +51,8 @@ export async function PUT(request: NextRequest, { params }: { params: { workerId
  *
  * If your DB has cascading deletes set up, you can simplify by only deleting the employee.
  */
-export async function DELETE(_: NextRequest, { params }: { params: { workerId: string } }) {
-    const { workerId } = await params;
+export async function DELETE(req: NextRequest, context: any) {
+    const { workerId } = await context.params;
     if (!workerId) return NextResponse.json({ error: "Missing workerId" }, { status: 400 });
 
     try {

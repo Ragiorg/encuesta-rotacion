@@ -3,8 +3,8 @@ import { prisma } from '@/lib/db';
 import { Employee, User } from '@/.generated/client';
 import survey from '@/constants/survey.json';
 
-export async function GET(request: Request, { params }: { params: { workerId: string } }) {
-  const { workerId } = await params;
+export async function GET(request: Request, context: any ) {
+  const { workerId } = await context.params;
 
   // Fetch survey responses for the given workerId where the workerId matches the Employee ID or User ID
   if (!workerId) {

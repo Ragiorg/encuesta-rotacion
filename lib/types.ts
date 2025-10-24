@@ -8,6 +8,14 @@ declare module "next-auth" {
       role: string
       organizationId?: string
       organizationName?: string
+      hiredAt?: string
+      departmentId?: string
+      departmentName?: string
+      positionId?: string
+      positionTitle?: string
+      name?: string | null
+      email?: string | null
+      image?: string | null
     } & DefaultSession["user"]
   }
 
@@ -15,6 +23,11 @@ declare module "next-auth" {
     role: string
     organizationId?: string
     organizationName?: string
+    hiredAt?: string
+    departmentId?: string
+    positionId?: string
+    positionTitle?: string
+    departmentName?: string
   }
 }
 

@@ -7,9 +7,9 @@ const prisma = new PrismaClient();
 
 export async function PUT(
     req: NextRequest,
-    { params }: { params: { userId: string } }
+    context: any
 ) {
-    const userId = params.userId;
+    const userId = context.params.userId;
     const data = await req.json();
 
     const session = await getServerSession(authOptions);

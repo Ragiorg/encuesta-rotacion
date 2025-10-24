@@ -277,9 +277,6 @@ const EmployeesPage = () => {
             employee={selectedEmployee}
             modalOpen={modalOpen}
             setModalOpen={setModalOpen}
-            onSave={(updated) => {
-                console.log('Saved employee:', updated);
-            }}
         />
         </>
   );
@@ -305,7 +302,7 @@ const editableFields: (keyof Employee)[] = [
     // Add other editable fields here, but exclude IDs and relation objects
 ];
 
-export const EmployeeInfoModal = ({
+const EmployeeInfoModal = ({
     employee,
     modalOpen,
     setModalOpen,

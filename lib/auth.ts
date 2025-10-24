@@ -5,25 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import { prisma } from "./db"
 import bcrypt from "bcryptjs"
 
-// Extend the Session user type to include custom properties
-declare module "next-auth" {
-  interface Session {
-    user: {
-      id: string
-      role: string
-      organizationId?: string
-      organizationName?: string
-      hiredAt?: string
-      departmentId?: string
-      departmentName?: string
-      positionId?: string
-      positionTitle?: string
-      name?: string | null
-      email?: string | null
-      image?: string | null
-    }
-  }
-}
+
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -37,7 +19,7 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" }
       },
-      async authorize(credentials) {
+      async authorize(credentials, req) {
         if (!credentials?.email || !credentials?.password) {
           return null
         }
@@ -78,7 +60,7 @@ export const authOptions: NextAuthOptions = {
           role: user.role,
           organizationId: user.organizationId || undefined,
           organizationName: user.Organization?.name,
-          hiredAt: user.hiredAt || undefined,
+          hiredAt: user.hiredAt ? user.hiredAt.toISOString() : undefined,
           departmentId: user.departmentId || undefined,
           departmentName: user.department?.name || undefined,
           positionTitle: user.position?.title || undefined,
@@ -93,16 +75,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        const customUser = user as typeof user & {
-          role?: string
-          organizationId?: string
-          organizationName?: string
-          hiredAt?: string
-          departmentId?: string
-          positionId?: string
-          positionTitle?: string
-          departmentName?: string
-        }
+        const customUser = user 
         token.role = customUser.role
         token.organizationId = customUser.organizationId
         token.organizationName = customUser.organizationName
